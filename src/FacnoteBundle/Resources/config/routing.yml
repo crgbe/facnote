@@ -1,0 +1,3 @@
+facnote_homepage:
+    path:     /
+    defaults: { _controller: FacnoteBundle:Client:index }

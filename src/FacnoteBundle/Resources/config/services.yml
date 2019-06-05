@@ -1,0 +1,4 @@
+services:
+#    facnote.example:
+#        class: FacnoteBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
