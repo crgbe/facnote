@@ -5,11 +5,43 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/facnote/css/bootstrap-4.3.1.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/facnote/css/simple-sidebar.css') }}">
     </head>
     <body>
-        {% block body %}
-            <h1>Hello Facnote !!!</h1>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar -->
+            <div class="bg-light border-right" id="sidebar-wrapper">
+                <div class="sidebar-heading"><b>FacNOTE</b> </div>
+                <div class="list-group list-group-flush">
+                    {% block sidebar %}
+                        <a href="{{ path('client_index') }}" class="list-group-item list-group-item-action bg-light">Clients</a>
+                    {% endblock sidebar %}
+{#                    <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>#}
+{#                    <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>#}
+{#                    <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>#}
+{#                    <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>#}
+{#                    <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>#}
+                </div>
+            </div>
+            <!-- /#sidebar-wrapper -->
+
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+                    <a class="navbar-brand" href="#">Facnote</a>
+                    {% block navbar %}{% endblock navbar %}
+                </nav>
+
+                <div class="container-fluid">
+                    {% block body %}{% endblock body %}
+                </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+        </div>
+        {% block javascripts %}
+            <script src="{{ asset('bundles/facnote/js/jquery-3.4.1.min.js') }}"></script>
+            <script src="{{ asset('bundles/facnote/css/bootstrap-4.3.1.min.css') }}"></script>
         {% endblock %}
-        {% block javascripts %}{% endblock %}
     </body>
 </html>

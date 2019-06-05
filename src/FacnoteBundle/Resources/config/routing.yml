@@ -1,3 +1,7 @@
-facnote_homepage:
+facnote_client:
+    resource: "@FacnoteBundle/Resources/config/routing/client.yml"
+    prefix:   /client
+
+facnotehomepage:
     path:     /
-    defaults: { _controller: FacnoteBundle:Client:index }
+    defaults: { _controller: "FacnoteBundle:Home:index" }
