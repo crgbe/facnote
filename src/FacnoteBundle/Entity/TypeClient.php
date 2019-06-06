@@ -29,12 +29,6 @@ class TypeClient
     private $title;
 
     /**
-     * @ORM\OneToMany(targetEntity="Client", mappedBy="type")
-     */
-    private $clients;
-
-
-    /**
      * Get id
      *
      * @return int
@@ -73,39 +67,5 @@ class TypeClient
     public function __construct()
     {
         $this->clients = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add client
-     *
-     * @param \FacnoteBundle\Entity\Client $client
-     *
-     * @return TypeClient
-     */
-    public function addClient(\FacnoteBundle\Entity\Client $client)
-    {
-        $this->clients[] = $client;
-
-        return $this;
-    }
-
-    /**
-     * Remove client
-     *
-     * @param \FacnoteBundle\Entity\Client $client
-     */
-    public function removeClient(\FacnoteBundle\Entity\Client $client)
-    {
-        $this->clients->removeElement($client);
-    }
-
-    /**
-     * Get clients
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getClients()
-    {
-        return $this->clients;
     }
 }

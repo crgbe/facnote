@@ -50,7 +50,7 @@ class Client
     private $address;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TypeClient", inversedBy="clients"))
+     * @ORM\ManyToOne(targetEntity="TypeClient"))
      */
     private $type;
 

@@ -19,35 +19,14 @@ class ClientController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $clientRep = $em->getRepository('FacnoteBundle:Client');
 
-        $clients = $em->getRepository('FacnoteBundle:Client')->findAll();
+        $clients = $clientRep->myFindAll();
+        $totalClient = $clientRep->myCount();
 
         return $this->render('client/index.html.twig', array(
             'clients' => $clients,
-        ));
-    }
-
-    /**
-     * Creates a new client entity.
-     *
-     */
-    public function newAction(Request $request)
-    {
-        $client = new Client();
-        $form = $this->createForm('FacnoteBundle\Form\ClientType', $client);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($client);
-            $em->flush();
-
-            return $this->redirectToRoute('client_show', array('id' => $client->getId()));
-        }
-
-        return $this->render('client/new.html.twig', array(
-            'client' => $client,
-            'form' => $form->createView(),
+            'totalClient' => $totalClient,
         ));
     }
 
@@ -69,23 +48,30 @@ class ClientController extends Controller
      * Displays a form to edit an existing client entity.
      *
      */
-    public function editAction(Request $request, Client $client)
+    public function formAction(Request $request, Client $client = null)
     {
-        $deleteForm = $this->createDeleteForm($client);
-        $editForm = $this->createForm('FacnoteBundle\Form\ClientType', $client);
-        $editForm->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if(!$client){
+            $client = new Client();
+        }
+
+        $form = $this->createForm('FacnoteBundle\Form\ClientType', $client);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($client);
+            $em->flush();
 
             return $this->redirectToRoute('client_show', array('id' => $client->getId()));
         }
 
-        return $this->render('client/edit.html.twig', array(
+
+        return $this->render('client/form.html.twig', [
             'client' => $client,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+            'form' => $form->createView(),
+        ]);
     }
 
     /**

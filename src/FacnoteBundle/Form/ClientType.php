@@ -23,6 +23,7 @@ class ClientType extends AbstractType
                 'class' => 'FacnoteBundle:TypeClient',
                 'choice_label' => 'title',
                 'placeholder' => 'Please select the client type',
+                'required' => true,
             ])
         ;
     }/**

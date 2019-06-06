@@ -1,14 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Client creation</h1>
-    <div class="btn-zone">
+    <h1>{{ client.id ? 'Modifier client' : 'Nouveau client' }}</h1>
+    <div class="d-flex justify-content-between btn-zone">
         <a class="btn btn-dark btn-sm" href="{{ path('client_index') }}">Clients list</a>
     </div>
 
     <div class="card col-sm-6">
         <div class="card-body">
-            {{ form_start(form, {'action': path('client_new'), 'method': 'POST', 'attr': {novalidate: 'novalidate'}}) }}
+            {{ form_start(form, {
+                'action': path('client_new_edit'),
+                'method': 'POST',
+                })
+            }}
             <div class="form-group row">
                 {{ form_label(form.firstname, null, { 'label_attr': {'class': 'col-sm-4 col-form-label'} }) }}
                 <div class="col-sm-8">

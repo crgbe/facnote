@@ -4,7 +4,7 @@
     <h1>Client</h1>
     <div class="btn-zone">
         <a class="btn btn-dark btn-sm" href="{{ path('client_index') }}">Clients list</a>
-        <a class="btn btn-warning btn-sm" href="{{ path('client_edit', { 'id': client.id }) }}">edit</a>
+        <a class="btn btn-warning btn-sm" href="{{ path('client_new_edit', { 'id': client.id }) }}">edit</a>
         {{ form_start(delete_form, {'attr': {'class': 'float-right'}}) }}
         <input class="btn btn-danger btn-sm" type="submit" value="Delete">
         {{ form_end(delete_form) }}

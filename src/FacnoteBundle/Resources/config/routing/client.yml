@@ -3,20 +3,15 @@ client_index:
     defaults: { _controller: "FacnoteBundle:Client:index" }
     methods:  GET
 
+client_new_edit:
+    path:     /new-edit/{id}
+    defaults: { _controller: "FacnoteBundle:Client:form", id: null }
+    methods:  [GET, POST]
+
 client_show:
     path:     /{id}/show
     defaults: { _controller: "FacnoteBundle:Client:show" }
     methods:  GET
-
-client_new:
-    path:     /new
-    defaults: { _controller: "FacnoteBundle:Client:new" }
-    methods:  [GET, POST]
-
-client_edit:
-    path:     /{id}/edit
-    defaults: { _controller: "FacnoteBundle:Client:edit" }
-    methods:  [GET, POST]
 
 client_delete:
     path:     /{id}/delete

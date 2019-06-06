@@ -10,4 +10,32 @@ namespace FacnoteBundle\Repository;
  */
 class ClientRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function myFindAll(){
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT 
+            c.id, 
+            c.firstname, 
+            c.lastname, 
+            c.email, 
+            c.address, 
+            t.title type 
+            FROM FacnoteBundle\Entity\Client c 
+            LEFT JOIN c.type t'
+        );
+
+        $users = $query->getResult();
+
+        return $users;
+    }
+
+    public function myCount(){
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery('SELECT COUNT(c.id) FROM FacnoteBundle\Entity\Client c');
+        $totalClient = $query->getSingleScalarResult();
+
+        return $totalClient;
+    }
 }

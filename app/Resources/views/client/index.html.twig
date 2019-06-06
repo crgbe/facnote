@@ -3,17 +3,22 @@
 {% block body %}
     <h1>Clients list</h1>
     <div>
-        <a class="btn btn-primary btn-sm" href="{{ path('client_new') }}">new client</a>
+        <a class="btn btn-primary btn-sm" href="{{ path('client_new_edit') }}">new client</a>
     </div>
 
     <table class="table table-striped table-hover">
         <thead>
+        <tr>
+            <td scope="row"><h5 class="display-5"><strong><em>Total</em></strong></h5></td>
+            <td colspan="5"><strong><em>{{ totalClient }}</em></strong></td>
+        </tr>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Firstname</th>
             <th scope="col">Lastname</th>
             <th scope="col">Email</th>
             <th scope="col">Address</th>
+            <th scope="col">Type</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -25,9 +30,10 @@
                 <td>{{ client.lastname }}</td>
                 <td>{{ client.email }}</td>
                 <td>{{ client.address }}</td>
+                <td>{{ client.type }}</td>
                 <td>
                     <a class="btn btn-info btn-sm" href="{{ path('client_show', { 'id': client.id }) }}">show</a>
-                    <a class="btn btn-warning btn-sm" href="{{ path('client_edit', { 'id': client.id }) }}">edit</a>
+                    <a class="btn btn-warning btn-sm" href="{{ path('client_new_edit', { 'id': client.id }) }}">edit</a>
                 </td>
             </tr>
         {% endfor %}
