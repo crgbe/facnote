@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Client</h1>
-    <div class="btn-zone">
+    <div class="facnote-context">
+        <h1>Client</h1>
+    </div>
+    <div class="btn-zone facnote-btn-context">
         <a class="btn btn-dark btn-sm" href="{{ path('client_index') }}">Clients list</a>
         <a class="btn btn-warning btn-sm" href="{{ path('client_new_edit', { 'id': client.id }) }}">edit</a>
         {{ form_start(delete_form, {'attr': {'class': 'float-right'}}) }}

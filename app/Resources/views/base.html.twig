@@ -7,12 +7,13 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/facnote/css/bootstrap-4.3.1.min.css') }}">
         <link rel="stylesheet" href="{{ asset('bundles/facnote/css/simple-sidebar.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/facnote/css/custom.css') }}">
     </head>
     <body>
         <div class="d-flex" id="wrapper">
             <!-- Sidebar -->
             <div class="bg-light border-right" id="sidebar-wrapper">
-                <div class="sidebar-heading"><b>FacNOTE</b> </div>
+                <div class="sidebar-heading"><b>FacNOTE</b></div>
                 <div class="list-group list-group-flush">
                     {% block sidebar %}
                         <a href="{{ path('client_index') }}" class="list-group-item list-group-item-action bg-light">Clients</a>
@@ -28,7 +29,8 @@
 
             <!-- Page Content -->
             <div id="page-content-wrapper">
-                <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+                <nav class="navbar navbar-light d-flex justify-content-start" style="background-color: #e3f2fd;">
+                    <a id="toggleMenu" class="btn btn-dark btn-sm mr-2" href="#">Cacher Menu</a>
                     <a class="navbar-brand" href="#">Facnote</a>
                     {% block navbar %}{% endblock navbar %}
                 </nav>
@@ -42,6 +44,7 @@
         {% block javascripts %}
             <script src="{{ asset('bundles/facnote/js/jquery-3.4.1.min.js') }}"></script>
             <script src="{{ asset('bundles/facnote/css/bootstrap-4.3.1.min.css') }}"></script>
+            <script src="{{ asset('bundles/facnote/js/custom.js') }}"></script>
         {% endblock %}
     </body>
 </html>

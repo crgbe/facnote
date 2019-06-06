@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Clients list</h1>
-    <div>
+    <div class="facnote-context">
+        <h1>Liste des clients</h1>
+    </div>
+    <div class="facnote-btn-context">
         <a class="btn btn-primary btn-sm" href="{{ path('client_new_edit') }}">new client</a>
     </div>
 
@@ -10,7 +12,7 @@
         <thead>
         <tr>
             <td scope="row"><h5 class="display-5"><strong><em>Total</em></strong></h5></td>
-            <td colspan="5"><strong><em>{{ totalClient }}</em></strong></td>
+            <td colspan="6"><strong><em>{{ totalClient }}</em></strong></td>
         </tr>
         <tr>
             <th scope="col">#</th>
