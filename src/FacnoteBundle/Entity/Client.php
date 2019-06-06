@@ -50,7 +50,7 @@ class Client
     private $address;
 
     /**
-     * @ORM\OneToMany(targetEntity="TypeClient", mappedBy="clients"))
+     * @ORM\ManyToOne(targetEntity="TypeClient", inversedBy="clients"))
      */
     private $type;
 
@@ -160,42 +160,25 @@ class Client
     {
         return $this->address;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->type = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add type
+     * Set type
      *
      * @param \FacnoteBundle\Entity\TypeClient $type
      *
      * @return Client
      */
-    public function addType(\FacnoteBundle\Entity\TypeClient $type)
+    public function setType(\FacnoteBundle\Entity\TypeClient $type = null)
     {
-        $this->type[] = $type;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Remove type
-     *
-     * @param \FacnoteBundle\Entity\TypeClient $type
-     */
-    public function removeType(\FacnoteBundle\Entity\TypeClient $type)
-    {
-        $this->type->removeElement($type);
-    }
-
-    /**
      * Get type
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \FacnoteBundle\Entity\TypeClient
      */
     public function getType()
     {

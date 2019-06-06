@@ -24,12 +24,12 @@ class TypeClient
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255)
      */
-    private $type;
+    private $title;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Client", inversedBy="type")
+     * @ORM\OneToMany(targetEntity="Client", mappedBy="type")
      */
     private $clients;
 
@@ -45,47 +45,64 @@ class TypeClient
     }
 
     /**
-     * Set type
+     * Set title
      *
-     * @param string $type
+     * @param string $title
      *
      * @return TypeClient
      */
-    public function setType($type)
+    public function setTitle($title)
     {
-        $this->type = $type;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get type
+     * Get title
      *
      * @return string
      */
-    public function getType()
+    public function getTitle()
     {
-        return $this->type;
+        return $this->title;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->clients = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Set clients
+     * Add client
      *
-     * @param \FacnoteBundle\Entity\Client $clients
+     * @param \FacnoteBundle\Entity\Client $client
      *
      * @return TypeClient
      */
-    public function setClients(\FacnoteBundle\Entity\Client $clients = null)
+    public function addClient(\FacnoteBundle\Entity\Client $client)
     {
-        $this->clients = $clients;
+        $this->clients[] = $client;
 
         return $this;
+    }
+
+    /**
+     * Remove client
+     *
+     * @param \FacnoteBundle\Entity\Client $client
+     */
+    public function removeClient(\FacnoteBundle\Entity\Client $client)
+    {
+        $this->clients->removeElement($client);
     }
 
     /**
      * Get clients
      *
-     * @return \FacnoteBundle\Entity\Client
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getClients()
     {

@@ -2,15 +2,46 @@
 
 {% block body %}
     <h1>Client creation</h1>
+    <div class="btn-zone">
+        <a class="btn btn-dark btn-sm" href="{{ path('client_index') }}">Clients list</a>
+    </div>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('client_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    <div class="card col-sm-6">
+        <div class="card-body">
+            {{ form_start(form, {'action': path('client_new'), 'method': 'POST', 'attr': {novalidate: 'novalidate'}}) }}
+            <div class="form-group row">
+                {{ form_label(form.firstname, null, { 'label_attr': {'class': 'col-sm-4 col-form-label'} }) }}
+                <div class="col-sm-8">
+                    {{ form_widget(form.firstname, {'attr': {'class': 'form-control'} }) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                {{ form_label(form.lastname, null, { 'label_attr': {'class': 'col-sm-4 col-form-label'} }) }}
+                <div class="col-sm-8">
+                    {{ form_widget(form.lastname, {'attr': {'class': 'form-control'} }) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                {{ form_label(form.email, null, { 'label_attr': {'class': 'col-sm-4 col-form-label'} }) }}
+                <div class="col-sm-8">
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control'} }) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                {{ form_label(form.address, null, { 'label_attr': {'class': 'col-sm-4 col-form-label'} }) }}
+                <div class="col-sm-8">
+                    {{ form_widget(form.address, {'attr': {'class': 'form-control'} }) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                {{ form_label(form.type, null, { 'label_attr': {'class': 'col-sm-4 col-form-label'} }) }}
+                <div class="col-sm-8">
+                    {{ form_widget(form.type, {'attr': {'class': 'form-control'} }) }}
+                </div>
+            </div>
+            <a class="btn btn-primary btn-sm" href="{{ path('client_index') }}">Retour</a>
+            <button type="submit" class="btn btn-success btn-sm">Create</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}

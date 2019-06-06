@@ -2,43 +2,44 @@
 
 {% block body %}
     <h1>Client</h1>
+    <div class="btn-zone">
+        <a class="btn btn-dark btn-sm" href="{{ path('client_index') }}">Clients list</a>
+        <a class="btn btn-warning btn-sm" href="{{ path('client_edit', { 'id': client.id }) }}">edit</a>
+        {{ form_start(delete_form, {'attr': {'class': 'float-right'}}) }}
+        <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+        {{ form_end(delete_form) }}
+    </div>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ client.id }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ client.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ client.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ client.email }}</td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td>{{ client.address }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('client_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('client_edit', { 'id': client.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="card col-sm-6">
+        <div class="card-body">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th class="border-top-0" scope="row">Firstname</th>
+                    <td class="border-top-0">{{ client.firstname }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Lastname</th>
+                    <td>{{ client.lastname }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>{{ client.email }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Address</th>
+                    <td>{{ client.address }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Type de client</th>
+                    <td>
+                        {% if client.type is not null %}
+                            {{ client.type.title }}
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}
