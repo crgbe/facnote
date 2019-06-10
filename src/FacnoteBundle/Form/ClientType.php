@@ -15,13 +15,13 @@ class ClientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname')
-            ->add('lastname')
-            ->add('email')
-            ->add('address')
-            ->add('type', EntityType::class, [
+            ->add('nomClient')
+            ->add('prenomClient')
+            ->add('telClient')
+            ->add('adrClient')
+            ->add('idType', EntityType::class, [
                 'class' => 'FacnoteBundle:TypeClient',
-                'choice_label' => 'title',
+                'choice_label' => 'nomType',
                 'placeholder' => 'Please select the client type',
                 'required' => true,
             ])

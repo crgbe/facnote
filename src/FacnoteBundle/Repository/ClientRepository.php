@@ -10,32 +10,23 @@ namespace FacnoteBundle\Repository;
  */
 class ClientRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function myFindAll(){
-        $em = $this->getEntityManager();
+    public function myFindAll($firstlimit,$maxLimit,$champOrder,$typeOrder){
 
-        $query = $em->createQuery(
-            'SELECT 
-            c.id, 
-            c.firstname, 
-            c.lastname, 
-            c.email, 
-            c.address, 
-            t.title type 
-            FROM FacnoteBundle\Entity\Client c 
-            LEFT JOIN c.type t'
-        );
+        $qb = $this->createQueryBuilder('c')
+            ->select('c.id','c.nomClient','c.prenomClient','c.adrClient','c.telClient','t.nomType')
+            ->join('c.idType', 't')
+            ->orderBy('c.' . $champOrder,$typeOrder)
+            ->setFirstResult($firstlimit)
+            ->setMaxResults($maxLimit);
 
-        $users = $query->getResult();
-
-        return $users;
+        return $qb->getQuery()->getResult();
     }
 
-    public function myCount(){
-        $em = $this->getEntityManager();
-
-        $query = $em->createQuery('SELECT COUNT(c.id) FROM FacnoteBundle\Entity\Client c');
-        $totalClient = $query->getSingleScalarResult();
-
-        return $totalClient;
+    public function getTotalClient()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('COUNT(c)')
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }

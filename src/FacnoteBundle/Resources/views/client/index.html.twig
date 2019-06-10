@@ -16,10 +16,10 @@
         </tr>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Firstname</th>
-            <th scope="col">Lastname</th>
-            <th scope="col">Email</th>
-            <th scope="col">Address</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Adresse</th>
             <th scope="col">Type</th>
             <th>Actions</th>
         </tr>
@@ -28,11 +28,11 @@
         {% for client in clients %}
             <tr>
                 <th scope="row">{{ loop.index }}</th>
-                <td>{{ client.firstname }}</td>
-                <td>{{ client.lastname }}</td>
-                <td>{{ client.email }}</td>
-                <td>{{ client.address }}</td>
-                <td>{{ client.type }}</td>
+                <td>{{ client.nomClient }}</td>
+                <td>{{ client.prenomClient }}</td>
+                <td>{{ client.telClient }}</td>
+                <td>{{ client.adrClient }}</td>
+                <td>{{ client.nomType }}</td>
                 <td>
                     <a class="btn btn-info btn-sm" href="{{ path('client_show', { 'id': client.id }) }}">show</a>
                     <a class="btn btn-warning btn-sm" href="{{ path('client_new_edit', { 'id': client.id }) }}">edit</a>

@@ -24,9 +24,9 @@ class TypeClient
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="nom_type", type="string", length=255)
      */
-    private $title;
+    private $nomType;
 
     /**
      * Get id
@@ -39,33 +39,26 @@ class TypeClient
     }
 
     /**
-     * Set title
+     * Set nomType
      *
-     * @param string $title
+     * @param string $nomType
      *
      * @return TypeClient
      */
-    public function setTitle($title)
+    public function setNomType($nomType)
     {
-        $this->title = $title;
+        $this->nomType = $nomType;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get nomType
      *
      * @return string
      */
-    public function getTitle()
+    public function getNomType()
     {
-        return $this->title;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->clients = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->nomType;
     }
 }

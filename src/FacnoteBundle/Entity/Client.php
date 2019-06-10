@@ -3,6 +3,7 @@
 namespace FacnoteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FacnoteBundle\FacnoteBundle;
 
 /**
  * Client
@@ -24,35 +25,37 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=255)
+     * @ORM\Column(name="nom_client", type="string", length=255)
      */
-    private $firstname;
+    private $nomClient;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastname", type="string", length=255, nullable=true)
+     * @ORM\Column(name="prenom_client", type="string", length=255, nullable=true)
      */
-    private $lastname;
+    private $prenomClient;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     * @ORM\Column(name="adr_client", type="string", length=255, nullable=true)
      */
-    private $email;
+    private $adrClient;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     * @ORM\Column(name="tel_client", type="string", length=255, nullable=true)
      */
-    private $address;
+    private $telClient;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TypeClient"))
+     * @var FacnoteBundle\Entity\TypeClient
+     * @ORM\ManyToOne(targetEntity="TypeClient")
+     * @ORM\JoinColumn(name="id_type", referencedColumnName="id")
      */
-    private $type;
+    private $idType;
 
 
     /**
@@ -66,122 +69,122 @@ class Client
     }
 
     /**
-     * Set firstname
+     * Set nomClient
      *
-     * @param string $firstname
+     * @param string $nomClient
      *
      * @return Client
      */
-    public function setFirstname($firstname)
+    public function setNomClient($nomClient)
     {
-        $this->firstname = $firstname;
+        $this->nomClient = $nomClient;
 
         return $this;
     }
 
     /**
-     * Get firstname
+     * Get nomClient
      *
      * @return string
      */
-    public function getFirstname()
+    public function getNomClient()
     {
-        return $this->firstname;
+        return $this->nomClient;
     }
 
     /**
-     * Set lastname
+     * Set prenomClient
      *
-     * @param string $lastname
+     * @param string $prenomClient
      *
      * @return Client
      */
-    public function setLastname($lastname)
+    public function setPrenomClient($prenomClient)
     {
-        $this->lastname = $lastname;
+        $this->prenomClient = $prenomClient;
 
         return $this;
     }
 
     /**
-     * Get lastname
+     * Get prenomClient
      *
      * @return string
      */
-    public function getLastname()
+    public function getPrenomClient()
     {
-        return $this->lastname;
+        return $this->prenomClient;
     }
 
     /**
-     * Set email
+     * Set adrClient
      *
-     * @param string $email
+     * @param string $adrClient
      *
      * @return Client
      */
-    public function setEmail($email)
+    public function setAdrClient($adrClient)
     {
-        $this->email = $email;
+        $this->adrClient = $adrClient;
 
         return $this;
     }
 
     /**
-     * Get email
+     * Get adrClient
      *
      * @return string
      */
-    public function getEmail()
+    public function getAdrClient()
     {
-        return $this->email;
+        return $this->adrClient;
     }
 
     /**
-     * Set address
+     * Set telClient
      *
-     * @param string $address
+     * @param string $telClient
      *
      * @return Client
      */
-    public function setAddress($address)
+    public function setTelClient($telClient)
     {
-        $this->address = $address;
+        $this->telClient = $telClient;
 
         return $this;
     }
 
     /**
-     * Get address
+     * Get telClient
      *
      * @return string
      */
-    public function getAddress()
+    public function getTelClient()
     {
-        return $this->address;
+        return $this->telClient;
     }
 
     /**
-     * Set type
+     * Set idType
      *
-     * @param \FacnoteBundle\Entity\TypeClient $type
+     * @param \FacnoteBundle\Entity\TypeClient $idType
      *
      * @return Client
      */
-    public function setType(\FacnoteBundle\Entity\TypeClient $type = null)
+    public function setIdType(\FacnoteBundle\Entity\TypeClient $idType = null)
     {
-        $this->type = $type;
+        $this->idType = $idType;
 
         return $this;
     }
 
     /**
-     * Get type
+     * Get idType
      *
      * @return \FacnoteBundle\Entity\TypeClient
      */
-    public function getType()
+    public function getIdType()
     {
-        return $this->type;
+        return $this->idType;
     }
 }

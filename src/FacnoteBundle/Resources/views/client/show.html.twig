@@ -7,9 +7,7 @@
     <div class="btn-zone facnote-btn-context">
         <a class="btn btn-dark btn-sm" href="{{ path('client_index') }}">Clients list</a>
         <a class="btn btn-warning btn-sm" href="{{ path('client_new_edit', { 'id': client.id }) }}">edit</a>
-        {{ form_start(delete_form, {'attr': {'class': 'float-right'}}) }}
-        <input class="btn btn-danger btn-sm" type="submit" value="Delete">
-        {{ form_end(delete_form) }}
+        <a class="btn btn-danger btn-sm float-right" href="{{ path('client_delete', { 'id': client.id }) }}">edit</a>
     </div>
 
     <div class="card col-sm-6">
@@ -18,25 +16,25 @@
                 <tbody>
                 <tr>
                     <th class="border-top-0" scope="row">Firstname</th>
-                    <td class="border-top-0">{{ client.firstname }}</td>
+                    <td class="border-top-0">{{ client.nomClient }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Lastname</th>
-                    <td>{{ client.lastname }}</td>
+                    <td>{{ client.prenomClient }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Email</th>
-                    <td>{{ client.email }}</td>
+                    <td>{{ client.telClient }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Address</th>
-                    <td>{{ client.address }}</td>
+                    <td>{{ client.adrClient }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Type de client</th>
                     <td>
-                        {% if client.type is not null %}
-                            {{ client.type.title }}
+                        {% if client.idType is not null %}
+                            {{ client.idType.nomType }}
                         {% endif %}
                     </td>
                 </tr>

@@ -2,6 +2,7 @@
 
 namespace FacnoteBundle\Controller;
 
+use FacnoteBundle\Form\ClientType;
 use FacnoteBundle\Entity\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,10 +22,11 @@ class ClientController extends Controller
         $em = $this->getDoctrine()->getManager();
         $clientRep = $em->getRepository('FacnoteBundle:Client');
 
-        $clients = $clientRep->myFindAll();
-        $totalClient = $clientRep->myCount();
+//        $clients = $clientRep->findBy(['nomClient' => 'Dexter',]);
+        $clients = $clientRep->myFindAll(1,10, 'nomClient', 'ASC');
+        $totalClient = $clientRep->getTotalClient();
 
-        return $this->render('client/index.html.twig', array(
+        return $this->render('@Facnote/client/index.html.twig', array(
             'clients' => $clients,
             'totalClient' => $totalClient,
         ));
@@ -36,11 +38,9 @@ class ClientController extends Controller
      */
     public function showAction(Client $client)
     {
-        $deleteForm = $this->createDeleteForm($client);
 
-        return $this->render('client/show.html.twig', array(
+        return $this->render('@Facnote/client/show.html.twig', array(
             'client' => $client,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -48,63 +48,56 @@ class ClientController extends Controller
      * Displays a form to edit an existing client entity.
      *
      */
-    public function formAction(Request $request, Client $client = null)
+    public function addAction(Request $request, $id = null)
     {
         $em = $this->getDoctrine()->getManager();
+        $_editMod = 0;
 
-        if(!$client){
-            $client = new Client();
+        $translator = $this->get('translator');
+        if(isset($id)) { // Edition
+            $c = $em->getRepository('FacnoteBundle:Client')->find($id);
+            if(!$c) {
+                throw $this->createNotFoundException($translator->trans('Client non trouvé'));
+            }
+            $_editMod = 1;
+        } else {
+            $c = new client();
+        }
+        $form = $this->createForm('FacnoteBundle\Form\ClientType', $c);
+
+        if($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if($form->isValid()) {
+                $em->persist($c);
+                $em->flush();
+                $flashMsg = $translator->trans('lbl.success.operation');
+                $this->get('session')->getFlashBag()->add('flashMessage', $flashMsg);
+                return $this->redirect($this->generateUrl('client_index'));
+            }
         }
 
-        $form = $this->createForm('FacnoteBundle\Form\ClientType', $client);
-        $form->handleRequest($request);
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($client);
-            $em->flush();
-
-            return $this->redirectToRoute('client_show', array('id' => $client->getId()));
-        }
-
-
-        return $this->render('client/form.html.twig', [
-            'client' => $client,
+        return $this->render('@Facnote/client/form.html.twig', array(
+            'editMod' => $_editMod,
             'form' => $form->createView(),
-        ]);
+        ));
     }
 
     /**
      * Deletes a client entity.
      *
      */
-    public function deleteAction(Request $request, Client $client)
+    public function deleteAction(Client $client)
     {
-        $form = $this->createDeleteForm($client);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $translator = $this->get('translator');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($client);
-            $em->flush();
+        $em->remove($client);
+        $em->flush();
+
+        if(!$client){
+            throw $this->createNotFoundException($translator->trans('Client non trouvé'));
         }
 
         return $this->redirectToRoute('client_index');
-    }
-
-    /**
-     * Creates a form to delete a client entity.
-     *
-     * @param Client $client The client entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Client $client)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('client_delete', array('id' => $client->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
     }
 }
